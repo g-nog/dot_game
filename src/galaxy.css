@@ -1,0 +1,306 @@
+body {
+  background: #020305;
+  isolation: isolate;
+}
+.universe-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: #020305;
+  background-position: center 52%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: filter 400ms ease;
+}
+.universe-backdrop.playing {
+  filter: brightness(0.62);
+}
+.galaxy {
+  --focus: #c5e7ff;
+  --surface: #080d15;
+  --muted: #b3bdc9;
+  --dot: #fff;
+}
+.galaxy-header {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  background: linear-gradient(#020407c9, #02040733);
+  border-bottom: 1px solid #ffffff16;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #c7cee0;
+}
+.galaxy-header a {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: #f2eee5;
+  text-decoration: none;
+}
+.galaxy-header i {
+  margin: 0 14px;
+  color: #a7b6c6;
+}
+.galaxy-live {
+  color: #b9c5d3;
+  font-size: 9px;
+}
+.galaxy .supported {
+  min-height: calc(100dvh - 104px);
+  padding: 24px;
+}
+.galaxy .card {
+  background: #060b13d1;
+  backdrop-filter: blur(16px);
+  border: 1px solid #d4e3f52b;
+  border-radius: 12px;
+  box-shadow: 0 24px 100px #0008;
+}
+.galaxy .setup {
+  max-width: 480px;
+  padding: 32px;
+}
+.galaxy h1 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(42px, 6vw, 60px);
+  letter-spacing: -2px;
+  line-height: 1.1;
+  color: #f4f0e7;
+  margin: 12px 0 18px;
+}
+.galaxy .eyebrow {
+  font-size: 9px;
+  letter-spacing: 2.4px;
+  color: #c8bd9f;
+  font-weight: 500;
+}
+.galaxy .lede {
+  font-size: 14px;
+  line-height: 1.8;
+  max-width: 390px;
+}
+.galaxy legend {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  font-weight: 500;
+  color: #c6ced9;
+}
+.galaxy .segmented label {
+  border-radius: 4px;
+  background: #02050966;
+  font-size: 12px;
+}
+.galaxy .segmented label.active {
+  background: #b4d7f11c;
+  border-color: #a5c9e4;
+}
+.galaxy input,
+.galaxy select {
+  border-radius: 4px;
+  background: #04070dbb;
+}
+.galaxy .primary {
+  border-radius: 4px;
+  background: #dae8ef;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 3px 28px #b2ced518;
+}
+.galaxy .setup > .primary {
+  margin-top: 26px;
+  min-height: 48px;
+}
+.galaxy .link {
+  color: #c2d4e0;
+  font-size: 12px;
+  font-weight: 500;
+}
+.galaxy.in-match .supported {
+  padding: 0;
+  min-height: 0;
+}
+.galaxy .game-shell {
+  max-width: none;
+  width: 100%;
+  height: calc(100dvh - 104px);
+  max-height: none;
+  grid-template-rows: 76px 30px minmax(0, 1fr) 92px;
+  padding: 12px 24px 0;
+  gap: 0;
+}
+.galaxy .match-status {
+  max-width: 580px;
+  width: 100%;
+  margin: auto;
+  gap: 8px;
+}
+.galaxy .score,
+.galaxy .turn-status {
+  border-radius: 6px;
+  background: #030810a8;
+  backdrop-filter: blur(12px);
+  padding: 8px 16px;
+}
+.galaxy .score.active {
+  background: color-mix(in srgb, var(--player) 7%, #050a11bb);
+  border: 1px solid #ffffff1f;
+  border-bottom: 2px solid var(--player);
+  box-shadow: none;
+}
+.galaxy .score strong {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 28px;
+}
+.star-guide {
+  align-self: center;
+  margin: 0;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  color: #d1dce9;
+  text-shadow:
+    0 1px 5px #000,
+    0 0 15px #000;
+  pointer-events: none;
+}
+.galaxy .turn-control {
+  width: min(100%, 490px);
+  margin: auto;
+  min-height: 78px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #03070dc7;
+  backdrop-filter: blur(12px);
+}
+.galaxy .field-shell {
+  position: relative;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.galaxy .rules-button {
+  top: 26px;
+  right: 32px;
+  border-color: #c8d9df44;
+  font-size: 11px;
+  background: #05090dbb;
+}
+.galaxy .die {
+  width: 44px;
+  height: 44px;
+  flex-basis: 44px;
+  padding: 8px;
+  gap: 3px;
+  border-radius: 8px;
+  background: #e3edf1;
+  box-shadow: 0 3px 0 #687c88;
+}
+.galaxy .modal {
+  background: #090f18;
+  border-radius: 8px;
+}
+.galaxy-credit {
+  min-height: 40px;
+  padding: 10px 20px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: linear-gradient(transparent, #020407b3);
+}
+.galaxy-credit a {
+  color: #b7c2ce;
+  font-size: 10px;
+  line-height: 1.5;
+  text-decoration: none;
+  text-shadow: 0 1px 4px #000;
+}
+.galaxy-credit a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+@media (max-width: 600px) {
+  .galaxy-header {
+    height: 48px;
+    padding: 0 18px;
+  }
+  .galaxy-header > span {
+    display: none;
+  }
+  .galaxy-header::after {
+    content: 'GALAXY DUEL';
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+  .galaxy .supported {
+    padding: 14px;
+    min-height: calc(100dvh - 98px);
+  }
+  .galaxy .setup {
+    padding: 24px 22px;
+  }
+  .galaxy .setup fieldset {
+    margin: 16px 0;
+  }
+  .galaxy .setup h1 {
+    margin: 8px 0 12px;
+  }
+  .galaxy .setup .lede {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .galaxy .setup > .primary {
+    margin-top: 18px;
+  }
+  .galaxy .game-shell {
+    height: calc(100dvh - 98px);
+    padding: 8px 8px 0;
+    grid-template-rows: 58px 46px minmax(0, 1fr) 92px;
+  }
+  .galaxy .match-status {
+    gap: 5px;
+    padding-right: 42px;
+  }
+  .galaxy .score,
+  .galaxy .turn-status {
+    padding: 6px;
+  }
+  .galaxy .score strong {
+    font-size: 22px;
+  }
+  .galaxy .score span {
+    font-size: 11px;
+  }
+  .galaxy .rules-button {
+    top: 15px;
+    right: 6px;
+    font-size: 10px;
+    padding: 5px;
+  }
+  .star-guide {
+    padding: 0 20px;
+    font-size: 10px;
+  }
+  .galaxy .turn-control {
+    min-height: 82px;
+    padding: 10px;
+    gap: 12px;
+  }
+  .galaxy-credit {
+    min-height: 50px;
+    padding: 8px 16px;
+  }
+  .galaxy-credit a {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .universe-backdrop {
+    transition: none;
+  }
+}

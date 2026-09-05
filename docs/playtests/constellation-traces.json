@@ -1,0 +1,962 @@
+[
+  {
+    "cycle": 1,
+    "starter": "A",
+    "outcome": {
+      "kind": "result",
+      "winner": 0,
+      "reason": "three"
+    },
+    "turns": [
+      13,
+      12
+    ],
+    "events": [
+      {
+        "sequence": "A",
+        "turn": 1,
+        "action": "draw",
+        "a": "s1",
+        "b": "s2",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "B",
+        "turn": 1,
+        "action": "draw",
+        "a": "s2",
+        "b": "s7",
+        "blockingOnly": true,
+        "completions": 0
+      },
+      {
+        "sequence": "A",
+        "turn": 2,
+        "action": "relocate",
+        "a": "s2",
+        "b": "s3",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "B",
+        "turn": 2,
+        "action": "draw",
+        "a": "s5",
+        "b": "s4",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "A",
+        "turn": 3,
+        "action": "draw",
+        "a": "s3",
+        "b": "s9",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "B",
+        "turn": 3,
+        "action": "draw",
+        "a": "s5",
+        "b": "s6",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "A",
+        "turn": 4,
+        "action": "draw",
+        "a": "s9",
+        "b": "s8",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 4,
+        "action": "draw",
+        "a": "s5",
+        "b": "s11",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 5,
+        "action": "draw",
+        "a": "s7",
+        "b": "s8",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 5,
+        "action": "draw",
+        "a": "s10",
+        "b": "s11",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 6,
+        "action": "draw",
+        "a": "s8",
+        "b": "s14",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 6,
+        "action": "draw",
+        "a": "s11",
+        "b": "s17",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 7,
+        "action": "draw",
+        "a": "s14",
+        "b": "s13",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 7,
+        "action": "draw",
+        "a": "s17",
+        "b": "s10",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 8,
+        "action": "draw",
+        "a": "s13",
+        "b": "s7",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 8,
+        "action": "draw",
+        "a": "s17",
+        "b": "s16",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 9,
+        "action": "draw",
+        "a": "s14",
+        "b": "s15",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 9,
+        "action": "draw",
+        "a": "s17",
+        "b": "s18",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 10,
+        "action": "draw",
+        "a": "s15",
+        "b": "s21",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 10,
+        "action": "draw",
+        "a": "s18",
+        "b": "s24",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 11,
+        "action": "draw",
+        "a": "s21",
+        "b": "s20",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 11,
+        "action": "draw",
+        "a": "s24",
+        "b": "s23",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 12,
+        "action": "draw",
+        "a": "s20",
+        "b": "s19",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 12,
+        "action": "draw",
+        "a": "s23",
+        "b": "s17",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 13,
+        "action": "draw",
+        "a": "s19",
+        "b": "s14",
+        "blockingOnly": false,
+        "completions": 3
+      }
+    ]
+  },
+  {
+    "cycle": 2,
+    "starter": "A",
+    "outcome": {
+      "kind": "result",
+      "winner": 1,
+      "reason": "three"
+    },
+    "turns": [
+      12,
+      13
+    ],
+    "events": [
+      {
+        "sequence": "A",
+        "turn": 1,
+        "action": "draw",
+        "a": "s1",
+        "b": "s2",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "B",
+        "turn": 1,
+        "action": "draw",
+        "a": "s2",
+        "b": "s7",
+        "blockingOnly": true,
+        "completions": 0
+      },
+      {
+        "sequence": "A",
+        "turn": 2,
+        "action": "relocate",
+        "a": "s2",
+        "b": "s3",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "B",
+        "turn": 2,
+        "action": "draw",
+        "a": "s5",
+        "b": "s4",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "A",
+        "turn": 3,
+        "action": "draw",
+        "a": "s3",
+        "b": "s9",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "B",
+        "turn": 3,
+        "action": "draw",
+        "a": "s5",
+        "b": "s6",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "A",
+        "turn": 4,
+        "action": "draw",
+        "a": "s9",
+        "b": "s8",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 4,
+        "action": "draw",
+        "a": "s5",
+        "b": "s11",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 5,
+        "action": "draw",
+        "a": "s7",
+        "b": "s8",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 5,
+        "action": "draw",
+        "a": "s10",
+        "b": "s11",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 6,
+        "action": "draw",
+        "a": "s8",
+        "b": "s14",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 6,
+        "action": "draw",
+        "a": "s11",
+        "b": "s17",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 7,
+        "action": "draw",
+        "a": "s14",
+        "b": "s13",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 7,
+        "action": "draw",
+        "a": "s17",
+        "b": "s10",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 8,
+        "action": "draw",
+        "a": "s13",
+        "b": "s7",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 8,
+        "action": "draw",
+        "a": "s17",
+        "b": "s16",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 9,
+        "action": "draw",
+        "a": "s14",
+        "b": "s15",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 9,
+        "action": "draw",
+        "a": "s17",
+        "b": "s18",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 10,
+        "action": "draw",
+        "a": "s15",
+        "b": "s21",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 10,
+        "action": "draw",
+        "a": "s18",
+        "b": "s24",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 11,
+        "action": "draw",
+        "a": "s21",
+        "b": "s20",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 11,
+        "action": "draw",
+        "a": "s24",
+        "b": "s23",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 12,
+        "action": "draw",
+        "a": "s20",
+        "b": "s19",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 12,
+        "action": "draw",
+        "a": "s23",
+        "b": "s17",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 13,
+        "action": "draw",
+        "a": "s19",
+        "b": "s14",
+        "blockingOnly": false,
+        "completions": 3
+      }
+    ]
+  },
+  {
+    "cycle": 3,
+    "starter": "B",
+    "outcome": {
+      "kind": "result",
+      "winner": 0,
+      "reason": "three"
+    },
+    "turns": [
+      13,
+      12
+    ],
+    "events": [
+      {
+        "sequence": "B",
+        "turn": 1,
+        "action": "draw",
+        "a": "s2",
+        "b": "s7",
+        "blockingOnly": true,
+        "completions": 0
+      },
+      {
+        "sequence": "A",
+        "turn": 1,
+        "action": "draw",
+        "a": "s1",
+        "b": "s2",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "B",
+        "turn": 2,
+        "action": "draw",
+        "a": "s5",
+        "b": "s4",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "A",
+        "turn": 2,
+        "action": "relocate",
+        "a": "s2",
+        "b": "s3",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "B",
+        "turn": 3,
+        "action": "draw",
+        "a": "s5",
+        "b": "s6",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "A",
+        "turn": 3,
+        "action": "draw",
+        "a": "s3",
+        "b": "s9",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "B",
+        "turn": 4,
+        "action": "draw",
+        "a": "s5",
+        "b": "s11",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 4,
+        "action": "draw",
+        "a": "s9",
+        "b": "s8",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 5,
+        "action": "draw",
+        "a": "s10",
+        "b": "s11",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 5,
+        "action": "draw",
+        "a": "s7",
+        "b": "s8",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 6,
+        "action": "draw",
+        "a": "s11",
+        "b": "s17",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 6,
+        "action": "draw",
+        "a": "s8",
+        "b": "s14",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 7,
+        "action": "draw",
+        "a": "s17",
+        "b": "s10",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 7,
+        "action": "draw",
+        "a": "s14",
+        "b": "s13",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 8,
+        "action": "draw",
+        "a": "s17",
+        "b": "s16",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 8,
+        "action": "draw",
+        "a": "s13",
+        "b": "s7",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 9,
+        "action": "draw",
+        "a": "s17",
+        "b": "s18",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 9,
+        "action": "draw",
+        "a": "s14",
+        "b": "s15",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 10,
+        "action": "draw",
+        "a": "s18",
+        "b": "s24",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 10,
+        "action": "draw",
+        "a": "s15",
+        "b": "s21",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 11,
+        "action": "draw",
+        "a": "s24",
+        "b": "s23",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 11,
+        "action": "draw",
+        "a": "s21",
+        "b": "s20",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 12,
+        "action": "draw",
+        "a": "s23",
+        "b": "s17",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 12,
+        "action": "draw",
+        "a": "s20",
+        "b": "s19",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 13,
+        "action": "draw",
+        "a": "s23",
+        "b": "s22",
+        "blockingOnly": false,
+        "completions": 3
+      }
+    ]
+  },
+  {
+    "cycle": 4,
+    "starter": "B",
+    "outcome": {
+      "kind": "result",
+      "winner": 1,
+      "reason": "three"
+    },
+    "turns": [
+      12,
+      13
+    ],
+    "events": [
+      {
+        "sequence": "B",
+        "turn": 1,
+        "action": "draw",
+        "a": "s2",
+        "b": "s7",
+        "blockingOnly": true,
+        "completions": 0
+      },
+      {
+        "sequence": "A",
+        "turn": 1,
+        "action": "draw",
+        "a": "s1",
+        "b": "s2",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "B",
+        "turn": 2,
+        "action": "draw",
+        "a": "s5",
+        "b": "s4",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "A",
+        "turn": 2,
+        "action": "relocate",
+        "a": "s2",
+        "b": "s3",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "B",
+        "turn": 3,
+        "action": "draw",
+        "a": "s5",
+        "b": "s6",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "A",
+        "turn": 3,
+        "action": "draw",
+        "a": "s3",
+        "b": "s9",
+        "blockingOnly": false,
+        "completions": 0
+      },
+      {
+        "sequence": "B",
+        "turn": 4,
+        "action": "draw",
+        "a": "s5",
+        "b": "s11",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 4,
+        "action": "draw",
+        "a": "s9",
+        "b": "s8",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 5,
+        "action": "draw",
+        "a": "s10",
+        "b": "s11",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 5,
+        "action": "draw",
+        "a": "s7",
+        "b": "s8",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 6,
+        "action": "draw",
+        "a": "s11",
+        "b": "s17",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 6,
+        "action": "draw",
+        "a": "s8",
+        "b": "s14",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 7,
+        "action": "draw",
+        "a": "s17",
+        "b": "s10",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "A",
+        "turn": 7,
+        "action": "draw",
+        "a": "s14",
+        "b": "s13",
+        "blockingOnly": false,
+        "completions": 1
+      },
+      {
+        "sequence": "B",
+        "turn": 8,
+        "action": "draw",
+        "a": "s17",
+        "b": "s16",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 8,
+        "action": "draw",
+        "a": "s13",
+        "b": "s7",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 9,
+        "action": "draw",
+        "a": "s17",
+        "b": "s18",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 9,
+        "action": "draw",
+        "a": "s14",
+        "b": "s15",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 10,
+        "action": "draw",
+        "a": "s18",
+        "b": "s24",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 10,
+        "action": "draw",
+        "a": "s15",
+        "b": "s21",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 11,
+        "action": "draw",
+        "a": "s24",
+        "b": "s23",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 11,
+        "action": "draw",
+        "a": "s21",
+        "b": "s20",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 12,
+        "action": "draw",
+        "a": "s23",
+        "b": "s17",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "A",
+        "turn": 12,
+        "action": "draw",
+        "a": "s20",
+        "b": "s19",
+        "blockingOnly": false,
+        "completions": 2
+      },
+      {
+        "sequence": "B",
+        "turn": 13,
+        "action": "draw",
+        "a": "s23",
+        "b": "s22",
+        "blockingOnly": false,
+        "completions": 3
+      }
+    ]
+  }
+]

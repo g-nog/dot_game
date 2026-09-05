@@ -1,4 +1,4 @@
-import type { Dot } from '../domain/triangle-duel/model';
+import type { Dot } from './model';
 
 export function orientation(a: Dot, b: Dot, c: Dot): number {
   return (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);

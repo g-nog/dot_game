@@ -11,3 +11,7 @@ Keep the defensive transition for saved/test fields and revisit the domain wordi
 - Complete Quick, Standard, and Extended matches on a real supported iPhone and a representative mid-range Android phone.
 - Confirm Extended feasibility checks remain below 50 ms on those devices. The local development benchmark is useful evidence, but it is not a physical-device measurement.
 - Connect GitHub and Cloudflare Pages, require the CI workflow on the production branch, verify preview/production deployment and headers, and exercise the documented provider rollback flow.
+
+## Constellations and gallery
+
+The separate constellation implementation, four-matchup traces, blocking/recovery examples, browser verification, generated art, and remaining human/device limitations are recorded in [Constellations verification](playtests/constellation-verification.md). Triangle Duel's findings and release requirements above remain specific to that game.

@@ -22,7 +22,8 @@
   "dependencies": {
     "@tailwindcss/vite": "latest",
     "svelte": "latest",
-    "tailwindcss": "latest"
+    "tailwindcss": "latest",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@eslint/js": "latest",
@@ -31,6 +32,7 @@
     "@testing-library/jest-dom": "latest",
     "@testing-library/svelte": "latest",
     "@types/node": "latest",
+    "@types/three": "^0.185.4",
     "eslint": "latest",
     "eslint-config-prettier": "latest",
     "eslint-plugin-svelte": "latest",

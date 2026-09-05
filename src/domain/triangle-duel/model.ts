@@ -1,15 +1,8 @@
-export type DotId = string;
+import type { DotId, DotField } from '../../geometry/model';
+export type { DotId, Dot, DotField } from '../../geometry/model';
+export { lineKey } from '../../geometry/model';
 export type PlayerId = 'player-1' | 'player-2';
 export type MatchSize = 'quick' | 'standard' | 'extended';
-
-export type Dot = Readonly<{ id: DotId; x: number; y: number }>;
-export type DotField = Readonly<{
-  width: number;
-  height: number;
-  margin: number;
-  minimumSeparation: number;
-  dots: readonly Dot[];
-}>;
 
 export type Player = Readonly<{ id: PlayerId; name: string; color: string }>;
 export type CommittedLine = Readonly<{
@@ -95,10 +88,6 @@ export const MATCH_SIZE_DOTS: Readonly<Record<MatchSize, number>> = {
 };
 
 export const PLAYER_COLORS = ['#e76f51', '#2a9d8f', '#7c6ee6', '#e9c46a'] as const;
-
-export function lineKey(a: DotId, b: DotId): string {
-  return a < b ? `${a}|${b}` : `${b}|${a}`;
-}
 
 export function triangleKey(ids: readonly DotId[]): string {
   return [...ids].sort().join('|');

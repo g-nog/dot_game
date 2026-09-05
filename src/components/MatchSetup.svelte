@@ -5,6 +5,12 @@
   export let onstart: (size: MatchSize, players: readonly [Player, Player]) => void;
   export let onrules: () => void;
 
+  import BackgroundPicker from './galaxy/BackgroundPicker.svelte';
+  import type { GalaxyBackgroundId } from './galaxy/backgrounds';
+  export let galaxy = false;
+  export let backgroundId: GalaxyBackgroundId = 'hubble';
+  export let onbackground: (id: GalaxyBackgroundId) => void = () => {};
+
   let size: MatchSize = 'standard';
   let firstName = '';
   let secondName = '';
@@ -26,9 +32,15 @@
 </script>
 
 <section class="card setup" aria-labelledby="setup-title">
-  <div class="eyebrow">Local two-player</div>
-  <h1 id="setup-title">Triangle Duel</h1>
-  <p class="lede">Roll. Connect exact quotas. Claim every open triangular face you complete.</p>
+  <div class="eyebrow">{galaxy ? 'A RIVALRY AMONG STARS' : 'Local two-player'}</div>
+  <h1 id="setup-title">{galaxy ? 'Galaxy Duel' : 'Triangle Duel'}</h1>
+  <p class="lede">
+    {galaxy
+      ? 'A universe between you. Roll the die, connect the stars, and claim your corner of the cosmos.'
+      : 'Roll. Connect exact quotas. Claim every open triangular face you complete.'}
+  </p>
+
+  {#if galaxy}<BackgroundPicker value={backgroundId} onchange={onbackground} />{/if}
 
   <fieldset>
     <legend>Match size</legend>
@@ -36,7 +48,10 @@
       {#each [['quick', 'Quick', '20 dots'], ['standard', 'Standard', '30 dots'], ['extended', 'Extended', '40 dots']] as option (option[0])}
         <label class:active={size === option[0]}>
           <input type="radio" bind:group={size} value={option[0]} />
-          <span>{option[1]}<small>{option[2]}</small></span>
+          <span
+            >{option[1]}<small>{galaxy ? option[2].replace('dots', 'stars') : option[2]}</small
+            ></span
+          >
         </label>
       {/each}
     </div>

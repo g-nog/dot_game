@@ -1,5 +1,5 @@
-import type { CommittedLine, Dot, DotField, DotId } from '../domain/triangle-duel/model';
-import { lineKey } from '../domain/triangle-duel/model';
+import type { Dot, DotField, DotId } from './model';
+import { lineKey } from './model';
 import { pointOnSegment, segmentsIntersectOrTouch } from './predicates';
 
 export type CandidateLine = Readonly<{ a: DotId; b: DotId }>;
@@ -10,7 +10,7 @@ export function dotMap(field: DotField): ReadonlyMap<DotId, Dot> {
 
 export function isLegalLine(
   field: DotField,
-  committed: readonly Pick<CommittedLine, 'a' | 'b'>[],
+  committed: readonly CandidateLine[],
   candidate: CandidateLine,
 ): boolean {
   if (candidate.a === candidate.b) return false;
@@ -44,7 +44,7 @@ export function isLegalLine(
 
 export function enumerateLegalLines(
   field: DotField,
-  committed: readonly Pick<CommittedLine, 'a' | 'b'>[],
+  committed: readonly CandidateLine[],
 ): CandidateLine[] {
   const result: CandidateLine[] = [];
   const dots = [...field.dots].sort((a, b) => a.id.localeCompare(b.id));
@@ -59,7 +59,7 @@ export function enumerateLegalLines(
 
 export function legalEndpoints(
   field: DotField,
-  committed: readonly Pick<CommittedLine, 'a' | 'b'>[],
+  committed: readonly CandidateLine[],
   from: DotId,
 ): DotId[] {
   return field.dots
