@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { MatchDiagnostics } from '../domain/triangle-duel/diagnostics';
-  import type { TriangleDuelMatch } from '../domain/triangle-duel/model';
-  export let match: TriangleDuelMatch;
+  import type { MatchDiagnostics } from '../domain/galaxy-duel/diagnostics';
+  import type { GalaxyDuelMatch } from '../domain/galaxy-duel/model';
+  export let match: GalaxyDuelMatch;
   export let diagnostics: MatchDiagnostics;
   export let resultLabel: string;
   export let scores: readonly [number, number];

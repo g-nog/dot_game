@@ -1,25 +1,25 @@
-import type { PlayerId, TriangleDuelMatch } from './model';
+import type { PlayerId, GalaxyDuelMatch } from './model';
 
-export function activePlayer(match: TriangleDuelMatch) {
+export function activePlayer(match: GalaxyDuelMatch) {
   return match.players[match.activePlayerIndex];
 }
 
-export function scoreFor(match: TriangleDuelMatch, playerId: PlayerId): number {
+export function scoreFor(match: GalaxyDuelMatch, playerId: PlayerId): number {
   return match.claims.filter((claim) => claim.playerId === playerId).length;
 }
 
-export function scores(match: TriangleDuelMatch): readonly [number, number] {
+export function scores(match: GalaxyDuelMatch): readonly [number, number] {
   return [scoreFor(match, 'player-1'), scoreFor(match, 'player-2')];
 }
 
-export function resultLabel(match: TriangleDuelMatch): string {
+export function resultLabel(match: GalaxyDuelMatch): string {
   if (match.phase.kind !== 'result') return '';
   const winnerId = match.phase.winnerId;
   if (!winnerId) return 'Draw';
   return `${match.players.find((player) => player.id === winnerId)?.name ?? winnerId} wins`;
 }
 
-export function visibleStatus(match: TriangleDuelMatch): string {
+export function visibleStatus(match: GalaxyDuelMatch): string {
   const player = activePlayer(match).name;
   switch (match.phase.kind) {
     case 'awaiting-roll':

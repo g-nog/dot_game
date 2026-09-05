@@ -3,7 +3,7 @@ import {
   type Dot,
   type DotField,
   type MatchSize,
-} from '../domain/triangle-duel/model';
+} from '../domain/galaxy-duel/model';
 import { orientation, squaredDistance } from '../geometry/predicates';
 import { seededRandom, type RandomSource } from './random';
 

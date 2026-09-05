@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { TriangleDuelMatch } from '../domain/triangle-duel/model';
-  export let match: TriangleDuelMatch;
+  import type { GalaxyDuelMatch } from '../domain/galaxy-duel/model';
+  export let match: GalaxyDuelMatch;
   export let status: string;
   export let onroll: () => void;
   export let onendturn: () => void;

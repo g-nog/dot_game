@@ -1,13 +1,13 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
-import { createDiagnostics } from '../src/domain/triangle-duel/diagnostics';
-import type { MatchSize, Player, TriangleDuelMatch } from '../src/domain/triangle-duel/model';
-import { scoreFor } from '../src/domain/triangle-duel/selectors';
+import { createDiagnostics } from '../src/domain/galaxy-duel/diagnostics';
+import type { MatchSize, Player, GalaxyDuelMatch } from '../src/domain/galaxy-duel/model';
+import { scoreFor } from '../src/domain/galaxy-duel/selectors';
 import {
   createMatch,
   matchInvariantErrors,
   transition,
-} from '../src/domain/triangle-duel/state-machine';
+} from '../src/domain/galaxy-duel/state-machine';
 import { findCompatibleLineSequence } from '../src/geometry/quota-feasibility';
 import { generateDotField } from '../src/generation/dot-field';
 
@@ -16,7 +16,7 @@ const players: readonly [Player, Player] = [
   { id: 'player-2', name: 'Second name must never enter diagnostics', color: '#2a9d8f' },
 ];
 
-function playToExhaustion(size: MatchSize, seed: number): TriangleDuelMatch {
+function playToExhaustion(size: MatchSize, seed: number): GalaxyDuelMatch {
   let match = createMatch({
     id: `generated-${size}-${seed}`,
     boardSeed: seed,

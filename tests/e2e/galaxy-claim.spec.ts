@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
-import { createMatch, transition } from '../../src/domain/triangle-duel/state-machine';
+import { createMatch, transition } from '../../src/domain/galaxy-duel/state-machine';
 import { generateDotField } from '../../src/generation/dot-field';
-import { createDiagnostics, recordTransition } from '../../src/domain/triangle-duel/diagnostics';
+import { createDiagnostics, recordTransition } from '../../src/domain/galaxy-duel/diagnostics';
 import { STORAGE_KEY } from '../../src/application/persistence';
 
 function almostTriangle() {
@@ -69,7 +69,7 @@ for (const reduced of [false, true]) {
   }) => {
     await page.emulateMedia({ reducedMotion: reduced ? 'reduce' : 'no-preference' });
     const fixture = almostTriangle();
-    await page.goto('/galaxy-duel/index.html');
+    await page.goto('/');
     await page.evaluate(({ key, value }) => localStorage.setItem(key, value), {
       key: `galaxy:${STORAGE_KEY}`,
       value: JSON.stringify(fixture.envelope),

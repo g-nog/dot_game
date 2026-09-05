@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { TriangleDuelMatch } from '../../domain/triangle-duel/model';
+  import type { GalaxyDuelMatch } from '../../domain/galaxy-duel/model';
   import type { createGalaxyScene } from './scene';
-  export let match: TriangleDuelMatch | undefined = undefined;
+  export let match: GalaxyDuelMatch | undefined = undefined;
   export let ready = false;
   let canvas: HTMLCanvasElement;
   let scene: ReturnType<typeof createGalaxyScene> | undefined;

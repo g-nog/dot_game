@@ -1,13 +1,12 @@
 <script lang="ts">
-  import type { MatchSize, Player } from '../domain/triangle-duel/model';
-  import { PLAYER_COLORS } from '../domain/triangle-duel/model';
+  import type { MatchSize, Player } from '../domain/galaxy-duel/model';
+  import { PLAYER_COLORS } from '../domain/galaxy-duel/model';
 
   export let onstart: (size: MatchSize, players: readonly [Player, Player]) => void;
   export let onrules: () => void;
 
   import BackgroundPicker from './galaxy/BackgroundPicker.svelte';
   import type { GalaxyBackgroundId } from './galaxy/backgrounds';
-  export let galaxy = false;
   export let backgroundId: GalaxyBackgroundId = 'hubble';
   export let onbackground: (id: GalaxyBackgroundId) => void = () => {};
 
@@ -32,26 +31,21 @@
 </script>
 
 <section class="card setup" aria-labelledby="setup-title">
-  <div class="eyebrow">{galaxy ? 'A RIVALRY AMONG STARS' : 'Local two-player'}</div>
-  <h1 id="setup-title">{galaxy ? 'Galaxy Duel' : 'Triangle Duel'}</h1>
+  <div class="eyebrow">A RIVALRY AMONG STARS</div>
+  <h1 id="setup-title">Galaxy Duel</h1>
   <p class="lede">
-    {galaxy
-      ? 'A universe between you. Roll the die, connect the stars, and claim your corner of the cosmos.'
-      : 'Roll. Connect exact quotas. Claim every open triangular face you complete.'}
+    A universe between you. Roll the die, connect the stars, and claim your corner of the cosmos.
   </p>
 
-  {#if galaxy}<BackgroundPicker value={backgroundId} onchange={onbackground} />{/if}
+  <BackgroundPicker value={backgroundId} onchange={onbackground} />
 
   <fieldset>
     <legend>Match size</legend>
     <div class="segmented">
-      {#each [['quick', 'Quick', '20 dots'], ['standard', 'Standard', '30 dots'], ['extended', 'Extended', '40 dots']] as option (option[0])}
+      {#each [['quick', 'Quick', '20 stars'], ['standard', 'Standard', '30 stars'], ['extended', 'Extended', '40 stars']] as option (option[0])}
         <label class:active={size === option[0]}>
           <input type="radio" bind:group={size} value={option[0]} />
-          <span
-            >{option[1]}<small>{galaxy ? option[2].replace('dots', 'stars') : option[2]}</small
-            ></span
-          >
+          <span>{option[1]}<small>{option[2]}</small></span>
         </label>
       {/each}
     </div>

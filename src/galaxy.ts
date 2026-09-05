@@ -2,4 +2,4 @@ import { mount } from 'svelte';
 import App from './App.svelte';
 import './styles.css';
 import './galaxy.css';
-mount(App, { target: document.getElementById('app')!, props: { galaxy: true } });
+mount(App, { target: document.getElementById('app')! });

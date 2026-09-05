@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { createDiagnostics, recordTransition } from '../src/domain/triangle-duel/diagnostics';
-import type { Player } from '../src/domain/triangle-duel/model';
-import { createMatch, transition } from '../src/domain/triangle-duel/state-machine';
+import { createDiagnostics, recordTransition } from '../src/domain/galaxy-duel/diagnostics';
+import type { Player } from '../src/domain/galaxy-duel/model';
+import { createMatch, transition } from '../src/domain/galaxy-duel/state-machine';
 import {
   discardMatch,
   restoreMatch,

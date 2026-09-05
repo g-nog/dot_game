@@ -1,4 +1,4 @@
-import type { MatchFact, MatchSize, PlayerId, TriangleDuelMatch } from './model';
+import type { MatchFact, MatchSize, PlayerId, GalaxyDuelMatch } from './model';
 
 export type MatchDiagnostics = Readonly<{
   schemaVersion: 1;
@@ -24,7 +24,7 @@ export type MatchDiagnostics = Readonly<{
   feasibilityCheckSamplesMs: readonly number[];
 }>;
 
-export function createDiagnostics(match: TriangleDuelMatch): MatchDiagnostics {
+export function createDiagnostics(match: GalaxyDuelMatch): MatchDiagnostics {
   return {
     schemaVersion: 1,
     appVersion: '1.0.0',
@@ -47,8 +47,8 @@ export function createDiagnostics(match: TriangleDuelMatch): MatchDiagnostics {
 
 export function recordTransition(
   diagnostics: MatchDiagnostics,
-  before: TriangleDuelMatch,
-  after: TriangleDuelMatch,
+  before: GalaxyDuelMatch,
+  after: GalaxyDuelMatch,
   facts: readonly MatchFact[],
   feasibilityDurationMs?: number,
   now = new Date(),

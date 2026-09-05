@@ -30,7 +30,7 @@ export type MatchPhase =
     }>
   | Readonly<{ kind: 'result'; exhaustedAfterLine: number; winnerId?: PlayerId }>;
 
-export type TriangleDuelMatch = Readonly<{
+export type GalaxyDuelMatch = Readonly<{
   schemaVersion: 1;
   id: string;
   boardSeed: number;
@@ -70,13 +70,13 @@ export type MatchFact =
 
 export type AcceptedTransition = Readonly<{
   accepted: true;
-  match: TriangleDuelMatch;
+  match: GalaxyDuelMatch;
   facts: readonly MatchFact[];
   feasibilityDurationMs?: number;
 }>;
 export type RejectedTransition = Readonly<{
   accepted: false;
-  match: TriangleDuelMatch;
+  match: GalaxyDuelMatch;
   reason: string;
 }>;
 export type MatchTransition = AcceptedTransition | RejectedTransition;

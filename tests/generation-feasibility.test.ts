@@ -1,6 +1,6 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
-import { MATCH_SIZE_DOTS, type MatchSize } from '../src/domain/triangle-duel/model';
+import { MATCH_SIZE_DOTS, type MatchSize } from '../src/domain/galaxy-duel/model';
 import { isLegalLine } from '../src/geometry/legal-lines';
 import { findCompatibleLineSequence } from '../src/geometry/quota-feasibility';
 import { generateDotField, validateDotField } from '../src/generation/dot-field';

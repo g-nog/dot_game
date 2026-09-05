@@ -3,8 +3,8 @@ import type {
   CommittedLine,
   DotField,
   PlayerId,
-} from '../domain/triangle-duel/model';
-import { lineKey, triangleKey } from '../domain/triangle-duel/model';
+} from '../domain/galaxy-duel/model';
+import { lineKey, triangleKey } from '../domain/galaxy-duel/model';
 import { dotMap } from './legal-lines';
 import { orientation, pointStrictlyInTriangle } from './predicates';
 

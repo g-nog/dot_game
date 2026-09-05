@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import type { DotField, Player } from '../src/domain/triangle-duel/model';
+import type { DotField, Player } from '../src/domain/galaxy-duel/model';
 import {
   createMatch,
   matchInvariantErrors,
   transition,
-} from '../src/domain/triangle-duel/state-machine';
+} from '../src/domain/galaxy-duel/state-machine';
 import { triangleField } from './fixtures/dot-fields';
 
 const players: readonly [Player, Player] = [
@@ -22,7 +22,7 @@ const create = (dotField: DotField = triangleField) =>
     createdAt: '2026-08-31T00:00:00.000Z',
   });
 
-describe('Triangle Duel state machine', () => {
+describe('Galaxy Duel state machine', () => {
   it('rejects invalid phase commands and die values without mutation', () => {
     const match = create();
     expect(transition(match, { type: 'COMMIT_LINE', a: 'a', b: 'b' })).toMatchObject({

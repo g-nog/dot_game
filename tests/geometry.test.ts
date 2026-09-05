@@ -1,6 +1,6 @@
 import fc from 'fast-check';
 import { describe, expect, it } from 'vitest';
-import type { CommittedLine } from '../src/domain/triangle-duel/model';
+import type { CommittedLine } from '../src/domain/galaxy-duel/model';
 import { enumerateLegalLines, isLegalLine } from '../src/geometry/legal-lines';
 import {
   orientation,

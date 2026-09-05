@@ -1,6 +1,6 @@
-# Dot Games
+# Galaxy Duel
 
-A gallery of three local, two-player strategy games: Triangle Duel, Constellations, and Galaxy Duel. The rules and canonical language are in [`CONTEXT.md`](CONTEXT.md).
+A local two-player strategy game: roll the die, connect stars, and claim triangles. The rules and canonical language are in [`CONTEXT.md`](CONTEXT.md).
 
 ## Develop
 
@@ -15,12 +15,7 @@ Quality gates are `npm run format:check`, `npm run lint`, `npm run check`, `npm 
 
 ## Play
 
-- `/index.html` — the game gallery.
-- `/triangle-duel/index.html` — the original dice-and-triangle game, including saved-match recovery and diagnostics.
-- `/galaxy-duel/index.html` — Triangle Duel in a procedural Three.js galaxy: luminous stars, animated connections and triangle claims, tap/drag/keyboard controls, and a separate saved match.
-- `/constellations/index.html` — the celestial atlas game: draw or relocate one owned connection per turn, complete three structural targets, and cycle through four rematch matchups. Matches stay in memory; reloading starts at setup.
-
-Constellations uses a flat Three.js star scene with SVG input and a usable no-WebGL fallback. Generated artwork is in `public/images/`; prompts are in [the asset record](docs/playtests/imagegen-assets.md). The fixed map, reproducible routes, benchmark results, and balance limitations are in [the verification record](docs/playtests/constellation-verification.md).
+Open `/` to play Galaxy Duel directly. The game supports tap, drag, and keyboard controls, saved-match recovery, selectable space backgrounds, and a playable SVG fallback when WebGL is unavailable. Existing Galaxy Duel saves are preserved.
 
 Browser checks now exercise production output. Install Chromium and WebKit with `npx playwright install --with-deps chromium webkit`, then run `npm run test:e2e`. An optional `PLAYWRIGHT_WEBKIT_EXECUTABLE_PATH` supports an externally prepared WebKit wrapper on hosts without system dependencies; ordinary installations do not need it.
 

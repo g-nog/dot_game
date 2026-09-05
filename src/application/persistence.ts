@@ -1,18 +1,19 @@
-import type { MatchDiagnostics } from '../domain/triangle-duel/diagnostics';
-import type { TriangleDuelMatch } from '../domain/triangle-duel/model';
-import { PLAYER_COLORS } from '../domain/triangle-duel/model';
-import { matchInvariantErrors } from '../domain/triangle-duel/state-machine';
+import type { MatchDiagnostics } from '../domain/galaxy-duel/diagnostics';
+import type { GalaxyDuelMatch } from '../domain/galaxy-duel/model';
+import { PLAYER_COLORS } from '../domain/galaxy-duel/model';
+import { matchInvariantErrors } from '../domain/galaxy-duel/state-machine';
 import { isLegalLine } from '../geometry/legal-lines';
 import { hasCompatibleLineSequence } from '../geometry/quota-feasibility';
 import { claimsCompletedByLine } from '../geometry/scoring-triangles';
 import { validateDotField } from '../generation/dot-field';
 
+// Retain the original suffix so existing Galaxy saves remain recoverable.
 export const STORAGE_KEY = 'triangle-duel:resumable-match';
 
 export type StoredMatchEnvelope = Readonly<{
   schemaVersion: 1;
   savedAt: string;
-  match: TriangleDuelMatch;
+  match: GalaxyDuelMatch;
   diagnostics: MatchDiagnostics;
 }>;
 
@@ -35,7 +36,7 @@ function validHistogram(value: unknown): value is readonly number[] {
 
 function validateDiagnostics(
   value: Record<string, unknown>,
-  match: TriangleDuelMatch,
+  match: GalaxyDuelMatch,
 ): string | undefined {
   if (value.schemaVersion !== 1 || typeof value.appVersion !== 'string')
     return 'The diagnostics version is invalid.';
@@ -99,7 +100,7 @@ function validateEnvelopeContents(value: unknown): RestoreResult {
     return { kind: 'invalid', reason: 'The save timestamp is invalid.' };
   if (!object(value.match) || !object(value.diagnostics))
     return { kind: 'invalid', reason: 'The snapshot is incomplete.' };
-  const match = value.match as unknown as TriangleDuelMatch;
+  const match = value.match as unknown as GalaxyDuelMatch;
   if (match.schemaVersion !== 1 || !['quick', 'standard', 'extended'].includes(match.size))
     return { kind: 'invalid', reason: 'The match metadata is invalid.' };
   if (
@@ -147,8 +148,8 @@ function validateEnvelopeContents(value: unknown): RestoreResult {
   const allowedPhases = ['awaiting-roll', 'drawing-lines', 'awaiting-end-turn', 'result'];
   if (!allowedPhases.includes(match.phase.kind) || match.phase.kind === 'result')
     return { kind: 'invalid', reason: 'Only unfinished matches can be resumed.' };
-  const committed: TriangleDuelMatch['lines'][number][] = [];
-  const reconstructedClaims: TriangleDuelMatch['claims'][number][] = [];
+  const committed: GalaxyDuelMatch['lines'][number][] = [];
+  const reconstructedClaims: GalaxyDuelMatch['claims'][number][] = [];
   for (const line of match.lines) {
     if (
       !object(line) ||
@@ -161,7 +162,7 @@ function validateEnvelopeContents(value: unknown): RestoreResult {
       line.turn > match.turn
     )
       return { kind: 'invalid', reason: 'A stored line is malformed.' };
-    const validLine = line as unknown as TriangleDuelMatch['lines'][number];
+    const validLine = line as unknown as GalaxyDuelMatch['lines'][number];
     if (!isLegalLine(match.dotField, committed, validLine))
       return { kind: 'invalid', reason: 'A stored line is not legal.' };
     committed.push(validLine);
@@ -255,7 +256,7 @@ export function restoreMatch(storage: Pick<Storage, 'getItem'>): RestoreResult {
 
 export function saveMatch(
   storage: Pick<Storage, 'setItem'>,
-  match: TriangleDuelMatch,
+  match: GalaxyDuelMatch,
   diagnostics: MatchDiagnostics,
   now = new Date(),
 ): void {

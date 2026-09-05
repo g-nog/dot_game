@@ -1,6 +1,6 @@
 import { tick } from 'svelte';
 import DieControl from '../src/components/DieControl.svelte';
-import { createMatch } from '../src/domain/triangle-duel/state-machine';
+import { createMatch } from '../src/domain/galaxy-duel/state-machine';
 import { triangleField } from './fixtures/dot-fields';
 import { cleanup, fireEvent, render, screen } from '@testing-library/svelte';
 import { afterEach, describe, expect, it, vi } from 'vitest';

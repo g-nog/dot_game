@@ -5,8 +5,8 @@ const { feasibility } = vi.hoisted(() => ({
 }));
 vi.mock('../src/geometry/quota-feasibility', () => ({ hasCompatibleLineSequence: feasibility }));
 
-import type { Player } from '../src/domain/triangle-duel/model';
-import { createMatch, transition } from '../src/domain/triangle-duel/state-machine';
+import type { Player } from '../src/domain/galaxy-duel/model';
+import { createMatch, transition } from '../src/domain/galaxy-duel/state-machine';
 import { triangleField } from './fixtures/dot-fields';
 
 const players: readonly [Player, Player] = [

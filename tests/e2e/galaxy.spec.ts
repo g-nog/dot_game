@@ -1,11 +1,15 @@
 import { expect, test } from '@playwright/test';
 import { STORAGE_KEY } from '../../src/application/persistence';
 
-test('galaxy renders, supports tap and keyboard, and keeps its save separate', async ({ page }) => {
-  await page.goto('/triangle-duel/index.html');
-  await page.getByRole('button', { name: 'Start match' }).click();
-  const original = await page.evaluate((key) => localStorage.getItem(key), STORAGE_KEY);
-  await page.goto('/galaxy-duel/index.html');
+test('home opens Galaxy Duel, supports tap and keyboard, and preserves legacy storage', async ({
+  page,
+}) => {
+  const original = 'legacy save';
+  await page.addInitScript(({ key, value }) => localStorage.setItem(key, value), {
+    key: STORAGE_KEY,
+    value: original,
+  });
+  await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Galaxy Duel' })).toBeVisible();
   await page.getByRole('button', { name: 'Start match' }).click();
   await expect(page.locator('.galaxy-field canvas')).toHaveAttribute('data-ready', 'true');
@@ -38,7 +42,7 @@ test('no WebGL still gives a playable star board', async ({ page }) => {
       return original.apply(this, args);
     } as typeof original;
   });
-  await page.goto('/galaxy-duel/index.html');
+  await page.goto('/');
   await page.getByRole('button', { name: 'Start match' }).click();
   await expect(page.locator('.galaxy-field')).not.toHaveClass(/webgl-ready/);
   await expect(page.getByRole('img', { name: /Die result:/ })).toBeVisible();
@@ -48,7 +52,7 @@ test('no WebGL still gives a playable star board', async ({ page }) => {
 });
 
 test('WebGL context loss reveals the fallback board', async ({ page }) => {
-  await page.goto('/galaxy-duel/index.html');
+  await page.goto('/');
   await page.getByRole('button', { name: 'Start match' }).click();
   await expect(page.locator('.galaxy-field')).toHaveClass(/webgl-ready/);
   await page.locator('.galaxy-field canvas').evaluate((canvas) => {
@@ -66,7 +70,7 @@ test('WebGL context loss reveals the fallback board', async ({ page }) => {
 
 test('Full HD field fills the screen and stays interactive after resizing', async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
-  await page.goto('/galaxy-duel/index.html');
+  await page.goto('/');
   const dimensions = await page.evaluate(async () => {
     const image = new Image();
     image.src = '/images/galaxy-macs0416.jpg';
@@ -93,7 +97,7 @@ test('Full HD field fills the screen and stays interactive after resizing', asyn
 });
 
 test('background selection previews both images and survives a resumed match', async ({ page }) => {
-  await page.goto('/galaxy-duel/index.html');
+  await page.goto('/');
   await expect(page.getByRole('radio', { name: 'Hubble · Galaxy cluster' })).toBeChecked();
   await page.getByRole('radio', { name: 'Webb · JADES deep field' }).check();
   await expect(page.locator('.universe-backdrop')).toHaveCSS(

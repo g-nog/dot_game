@@ -1,5 +1,5 @@
-import type { TriangleDuelMatch } from '../domain/triangle-duel/model';
-import { resultLabel, scores, visibleStatus } from '../domain/triangle-duel/selectors';
+import type { GalaxyDuelMatch } from '../domain/galaxy-duel/model';
+import { resultLabel, scores, visibleStatus } from '../domain/galaxy-duel/selectors';
 
 export type MatchView = Readonly<{
   scores: readonly [number, number];
@@ -7,7 +7,7 @@ export type MatchView = Readonly<{
   resultLabel: string;
 }>;
 
-export function createMatchView(match: TriangleDuelMatch): MatchView {
+export function createMatchView(match: GalaxyDuelMatch): MatchView {
   return {
     scores: scores(match),
     status: visibleStatus(match),

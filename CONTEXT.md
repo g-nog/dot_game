@@ -1,10 +1,10 @@
-# Dot Game
+# Galaxy Duel
 
-A collection of approachable tactical games played by connecting dots, beginning with the untimed two-player Triangle Duel mode and its brief moments of dice-and-claim suspense.
+An untimed local two-player strategy game played by connecting stars, with brief moments of dice-and-claim suspense.
 
 ## Language
 
-**Triangle Duel**:
+**Galaxy Duel**:
 The v1 local two-player mode in which die rolls set exact line quotas and completed triangular faces score points.
 
 **Turn**:
@@ -178,158 +178,8 @@ _Avoid_: Difficulty
 - "Difficulty" was being used for dot count; resolved as **Match size**, because it primarily controls density and duration.
 - Large differences in cumulative roll totals may dominate tactical play; accepted for the first prototype, with equal per-round rolls as the first balancing alternative to test.
 
-## Game selection
+## Presentation and persistence
 
-### Language
+Galaxy Duel opens directly at `/`. Three.js renders stars, connections, and triangle claims; SVG provides tap, drag, keyboard controls, and a playable fallback when WebGL is unavailable. Visual projection never changes logical coordinates or legality.
 
-**Game menu**:
-The opening screen where players choose which game to play.
-
-### Relationships
-
-- The app opens on the **Game menu**, initially offering Triangle Duel and the constellation game as separate choices.
-- Additional games may be added to the **Game menu** for experimentation and comparison.
-- The **Game menu** is a gallery whose game cards show a name, short description, visual preview, and Play button.
-- Each game keeps its own visual identity: Triangle Duel has a geometric preview, while the constellation game has a star-map preview and its own space theme.
-- The constellation game is a separate game derived from Triangle Duel, not a replacement or alternate ruleset inside the original match.
-- The **Game menu** may link to separate game pages; the games do not require a shared session lifecycle.
-- The constellation game does not store sessions or offer saved-match continuation; its match lives only in the open page.
-- Gallery cards offer Play without inspecting saved matches. Triangle Duel's existing recovery behavior remains specific to its own page.
-- A future decision may retain only the user's preferred game; no existing game is selected for removal now.
-
-### Example dialogue
-
-> **Dev:** "Does the constellation game replace Triangle Duel as the default?"
-> **Domain expert:** "No. Start with a menu so players can choose either game, and we can add more before deciding what to keep."
-
-## Constellation mode
-
-This section records the constellation rules implemented alongside Triangle Duel. Verification and exploratory balance findings are in `docs/playtests/constellation-verification.md`.
-
-### Language
-
-**Star map**:
-The shared play area of stars that both players connect while competing to complete constellations.
-
-**Constellation pattern**:
-A predefined structure of connections between stars that serves as a visible building target, independent of angles, lengths, or orientation.
-_Avoid_: Freeform scoring shape
-
-**Target sequence**:
-A player's ordered set of three constellation patterns, visible to both players from the start of the match.
-
-**Prevention**:
-Interference with an opponent's unfinished constellation that obstructs its completion.
-_Avoid_: Stealing, destroying completed constellations
-
-**Blocking connection**:
-A drawn connection that prevents a desired later connection because the two would cross.
-
-**Owned connection**:
-A connection belonging exclusively to the player who drew it and usable only toward that player's constellations.
-
-**Relocation**:
-A player's full-turn action that replaces one of their own unfinished connections with a legal connection anywhere on the star map.
-
-### Relationships
-
-- Both players build toward constellations on one **Star map**.
-- All playable stars and connections lie on one flat plane; the surrounding space scene may convey visual depth.
-- Visual depth does not allow connections to pass above or below one another or change the noncrossing rule.
-- Different **Star maps** provide distinct layouts and blocking opportunities while retaining the same PvP rules.
-- The initial version starts with one **Star map** for playtesting; additional layouts follow once the core rules have been evaluated.
-- The first **Star map** uses a fixed, deliberately designed star arrangement so repeated matches can test blocking and fairness consistently; randomly generated maps are deferred.
-- A solo campaign is deferred beyond the initial constellation version.
-- The first playable constellation version supports two players alternating turns on one shared device; online play is deferred.
-- Players pursue predefined **Constellation patterns**, with target patterns visible to both players so opponents can anticipate completion.
-- Each player pursues a different **Constellation pattern**; both players can see both targets.
-- The two assigned **Constellation patterns** should have comparable completion difficulty.
-- **Prevention** targets unfinished constellations; completed constellations remain secure.
-- Building one's own constellation and obstructing an opponent should compete for turn actions.
-- Drawn connections cannot cross; a **Blocking connection** can advance one player's target while obstructing the other's intended route.
-- **Prevention** uses ordinary connection drawing, without a dedicated sabotage action in the initial design.
-- A player may draw any legal connection solely to block an opponent, even when it advances none of their targets; it consumes their normal turn action.
-- Connections drawn solely for blocking remain owned by their drawer and may later contribute to a target or be relocated while unfinished.
-- A player may spend an entire turn on **Relocation** to seek another arrangement of stars for their **Constellation pattern**.
-- **Relocation** must respect the noncrossing rule and cannot move an opponent's connection or a connection belonging to a completed constellation.
-- **Relocation** may change both endpoints; all other connections stay in place, and replacement legality is evaluated with the original connection removed.
-- Players alternate turns, taking exactly one action: draw one connection or perform one **Relocation**.
-- After a draw or **Relocation** is committed and any completion choice is resolved, the player explicitly acknowledges End turn before control passes to the opponent.
-- End turn confirms the shared-device handoff; the action is already committed and the acknowledgment is not an undo opportunity.
-- Constellation mode uses no die roll or **Line quota**.
-- A drawing matches a **Constellation pattern** by how its stars connect, with flexible angles, lengths, and orientation.
-- Patterns with the same connection structure count as the same **Constellation pattern**, even when their illustrated silhouettes differ.
-- Every drawn connection is an **Owned connection**; only a player's own connections count toward their constellation.
-- Stars are shared: both players may draw connections from the same star.
-- A connection between a given pair of stars can be drawn only once, so taking it denies that connection to the opponent.
-- Each player has one active **Constellation pattern** at a time.
-- Each player receives a **Target sequence** at the start; the two sequences should have comparable difficulty and preserve different active targets between opponents.
-- The prototype uses two fixed **Target sequences** designed for the first **Star map**, rather than random target assignments.
-- Both **Target sequences** progress through patterns requiring three, four, and five connections, respectively.
-- Sequence A contains, in order: a three-connection chain through four stars, a four-star loop, and a five-star loop.
-- Sequence B contains, in order: three spokes joining one central star to three other stars, a triangle with one additional connection from a triangle star to a fourth star, and a four-star loop with one additional connection from a loop star to a fifth star.
-- These six pattern structures are the initial prototype roster; their names and balance remain subject to playtesting.
-- Completing a sequence requires at least 12 drawing actions; equal connection counts are a starting constraint, not proof of equal placement difficulty.
-- Constellation rematches automatically cycle through four matchups on the fixed map so each player tries each **Target sequence** both starting and going second.
-- Relative to an opening matchup where the first player has sequence A and starts, the cycle is: first player A and starts; first player B and goes second; first player B and starts; first player A and goes second, then repeat.
-- Only the current target in a **Target sequence** can score; later targets are visible for planning.
-- Completing a constellation preserves it on the **Star map** and activates the next target in the player's **Target sequence**, unless that completion wins the match.
-- The first player to complete three constellations wins; three is the initial threshold to evaluate through playtesting.
-- If neither player completes three constellations, the match ends after both players have taken 20 turns; the player with more completed constellations wins, with equal totals producing a draw.
-- The 20-turn allowance per player is an initial playtesting value; reaching three completions still ends the match immediately.
-- A player with no legal draw or **Relocation** automatically passes, consuming one of their turns.
-- If neither player has a legal action, continue forced passes in normal turn order, allowing at most one prepared active-target completion per turn.
-- On a blocked board, stop when a player reaches three completions, the turn limit is reached, or neither player has a prepared active target left; reaching three wins immediately, otherwise compare completed totals and draw on equality.
-- An obstructed target does not allow passing while a legal draw or **Relocation** remains available.
-- Each **Owned connection** may count toward only one completed constellation; completion reserves its participating connections permanently.
-- Stars in completed constellations remain available for new connections and later constellations.
-- A player's unfinished connections elsewhere remain available toward later targets.
-- A **Constellation pattern** may match within a larger drawing; extra connections at its stars do not invalidate the match.
-- Completion reserves only the connections selected for the matching pattern; extra unfinished connections remain available.
-- Loops may enclose other stars and connections without invalidating a **Constellation pattern**.
-- Completing a loop does not claim its enclosed territory or freeze its contents; enclosed stars and unfinished connections remain playable under the ordinary ownership and noncrossing rules.
-- A completed loop remains a crossing barrier: a connection cannot cross a boundary edge, but shared boundary stars may be used to connect onward through legal connections.
-- When several valid matches for the active **Constellation pattern** are available, the game highlights them and the player chooses which match to claim as part of the current action, without spending another turn.
-- A single valid match for the active **Constellation pattern** is completed automatically.
-- A player may complete at most one constellation per turn, after their draw, **Relocation**, or forced pass.
-- A forced pass permits an already-built active target to score, subject to the same matching, selection, and reservation rules.
-- If activating the next target reveals an already-built match among unfinished connections, it cannot score until that player's next turn after their draw, **Relocation**, or forced pass; the opponent takes a turn first.
-
-### Example dialogue
-
-> **Dev:** "My opponent is one connection away from completing a constellation. Can I interfere?"
-> **Domain expert:** "Yes, prevention is the intended rivalry. Once it is completed, I cannot destroy or steal it."
-
-> **Dev:** "My intended final connection is blocked. Can I reposition an earlier connection?"
-> **Domain expert:** "Yes, relocating one of my unfinished connections costs my entire turn; completed constellations stay fixed."
-
-### Visual direction
-
-- The constellation game uses a celestial-atlas style: deep navy space, luminous stars, faint nebulae, and crisp connections in each player's color.
-- Completing a constellation briefly reveals an illustration adapted to its connected stars, then settles into a subtle glow that preserves board readability.
-- Completion illustrations are decorative and impose no additional shape requirements on **Constellation pattern** matching.
-
-### Flagged ambiguities
-
-- "Get in the way" is resolved as **Prevention** through **Blocking connections**, rather than attacking completed constellations or disabling stars.
-- "Constellation" uses a predefined **Constellation pattern**, rather than an arbitrary drawing awarded points after creation.
-- Targets use the fixed prototype roster and two publicly visible **Target sequences** rotated across four rematch matchups; initial sequence assignment and starting player are randomized independently.
-- Swapping both sequences and starter every rematch would always give the same sequence the first move; resolved with a four-matchup rotation covering both starting positions for each player and sequence.
-- An already-built later target must wait until the player's next turn to score after an action or forced pass; completion never cascades through multiple targets in one turn.
-- Extra branches and other connections around a matching pattern are allowed and are not reserved by that completion.
-- Unlike Triangle Duel's empty **Scoring triangles** and **Closed triangles**, constellation loops may enclose playable stars and connections; only the completed pattern's connections are reserved.
-- Completed constellations cannot share connections, but may share stars; when several matches exist, the player chooses which match's connections to reserve.
-- The match is a race to three completions with a fallback of 20 turns per player, decided by completed-constellation totals with ties drawn; Meridian v1 has 24 fixed stars; scripted examples establish feasibility, while human balance review remains open.
-- Constellation mode uses exclusive **Owned connections** and shared stars, unlike Triangle Duel's neutral **Attributed lines**.
-- Recovery allows **Relocation** of both endpoints anywhere on the map at the cost of a full turn, leaving all other connections untouched.
-- Normal turns allow one connection draw or one **Relocation**, without dice; no legal action causes an automatic pass that may score one prepared active target. A blocked board resolves in normal turn order until three completions, the turn limit, or neither player having a prepared active target ends the match.
-- The initial constellation design uses a flat playfield with visual depth, rather than true three-dimensional play; the requested Three.js renderer adds visual depth above exact integer coordinates, with an accessible SVG input layer and fallback.
-- "Levels" means different PvP **Star map** layouts for now; a solo campaign is deferred.
-
-## Galaxy Duel
-
-Galaxy Duel is a separately selectable visual edition of Triangle Duel at `/galaxy-duel/index.html`. The same match controller, state machine, field generator, scoring, quotas, and rematch rules apply. A dot is rendered as a star; visual animation never changes logical coordinates or legality.
-
-Three.js draws the procedural galaxy, star sprites, glowing lines, and translucent triangle claims. SVG supplies aligned input, legal endpoint highlights, and fallback rendering when WebGL is unavailable or lost. Players can drag, tap two stars, or focus stars and use Enter/Space (Escape cancels). Reduced-motion preferences stop continuous animation; hidden pages suspend rendering. GPU resources are disposed when the view unmounts. Three.js loads lazily.
-
-Galaxy saves use `galaxy:triangle-duel:resumable-match`, separate from the original game's saved match. The gallery card uses a screenshot of actual gameplay at `public/images/galaxy-duel.png`.
+Existing saves retain the `galaxy:triangle-duel:resumable-match` storage key and schema. Background selection remains under `galaxy:background`.

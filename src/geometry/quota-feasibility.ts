@@ -1,4 +1,4 @@
-import type { CommittedLine, DotField } from '../domain/triangle-duel/model';
+import type { CommittedLine, DotField } from '../domain/galaxy-duel/model';
 import { enumerateLegalLines, isLegalLine, type CandidateLine } from './legal-lines';
 
 export function findCompatibleLineSequence(

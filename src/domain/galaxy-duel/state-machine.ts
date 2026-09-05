@@ -8,20 +8,20 @@ import type {
   MatchFact,
   MatchTransition,
   Player,
-  TriangleDuelMatch,
+  GalaxyDuelMatch,
 } from './model';
 
 export type MatchSetup = Readonly<{
   id: string;
   boardSeed: number;
-  size: TriangleDuelMatch['size'];
-  dotField: TriangleDuelMatch['dotField'];
+  size: GalaxyDuelMatch['size'];
+  dotField: GalaxyDuelMatch['dotField'];
   players: readonly [Player, Player];
   startingPlayerIndex: 0 | 1;
   createdAt: string;
 }>;
 
-export function createMatch(setup: MatchSetup): TriangleDuelMatch {
+export function createMatch(setup: MatchSetup): GalaxyDuelMatch {
   return {
     schemaVersion: 1,
     ...setup,
@@ -33,12 +33,12 @@ export function createMatch(setup: MatchSetup): TriangleDuelMatch {
   };
 }
 
-function reject(match: TriangleDuelMatch, reason: string): MatchTransition {
+function reject(match: GalaxyDuelMatch, reason: string): MatchTransition {
   return { accepted: false, match, reason };
 }
 
 function accepted(
-  match: TriangleDuelMatch,
+  match: GalaxyDuelMatch,
   facts: MatchFact[],
   feasibilityDurationMs?: number,
 ): AcceptedTransition {
@@ -50,7 +50,7 @@ function accepted(
   };
 }
 
-function winner(match: TriangleDuelMatch) {
+function winner(match: GalaxyDuelMatch) {
   const first = scoreFor(match, 'player-1');
   const second = scoreFor(match, 'player-2');
   return first === second
@@ -60,7 +60,7 @@ function winner(match: TriangleDuelMatch) {
       : ('player-2' as const);
 }
 
-export function transition(match: TriangleDuelMatch, command: MatchCommand): MatchTransition {
+export function transition(match: GalaxyDuelMatch, command: MatchCommand): MatchTransition {
   if (command.type === 'START_REMATCH') {
     if (match.phase.kind !== 'result')
       return reject(match, 'A rematch can start only after a result');
@@ -186,7 +186,7 @@ export function transition(match: TriangleDuelMatch, command: MatchCommand): Mat
   return reject(match, 'Unknown command');
 }
 
-export function matchInvariantErrors(match: TriangleDuelMatch): string[] {
+export function matchInvariantErrors(match: GalaxyDuelMatch): string[] {
   const errors: string[] = [];
   const dotIds = new Set(match.dotField.dots.map((dot) => dot.id));
   const lineKeys = new Set<string>();

@@ -6,13 +6,5 @@ export default defineConfig({
   plugins: [tailwindcss(), svelte()],
   build: {
     sourcemap: false,
-    rollupOptions: {
-      input: {
-        gallery: 'index.html',
-        galaxy: 'galaxy-duel/index.html',
-        triangle: 'triangle-duel/index.html',
-        constellations: 'constellations/index.html',
-      },
-    },
   },
 });

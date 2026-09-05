@@ -1,4 +1,4 @@
-import type { Dot, DotField } from '../../src/domain/triangle-duel/model';
+import type { Dot, DotField } from '../../src/domain/galaxy-duel/model';
 
 export function field(dots: readonly Dot[]): DotField {
   return { width: 1000, height: 1000, margin: 0, minimumSeparation: 1, dots };

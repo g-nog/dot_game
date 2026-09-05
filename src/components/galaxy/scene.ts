@@ -1,5 +1,5 @@
 import * as T from 'three';
-import type { TriangleDuelMatch } from '../../domain/triangle-duel/model';
+import type { GalaxyDuelMatch } from '../../domain/galaxy-duel/model';
 
 /** Rendering only: all picking and legality remain in the exact logical board. */
 export function createGalaxyScene(canvas: HTMLCanvasElement) {
@@ -41,7 +41,7 @@ export function createGalaxyScene(canvas: HTMLCanvasElement) {
   let born = 0;
   let previousLines = 0;
   let previousClaims = 0;
-  function update(match: TriangleDuelMatch) {
+  function update(match: GalaxyDuelMatch) {
     graph.clear();
     boardResources.forEach((r) => r.dispose());
     boardResources = [];

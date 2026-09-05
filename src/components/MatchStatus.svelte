@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { TriangleDuelMatch } from '../domain/triangle-duel/model';
-  export let match: TriangleDuelMatch;
+  import type { GalaxyDuelMatch } from '../domain/galaxy-duel/model';
+  export let match: GalaxyDuelMatch;
   export let scores: readonly [number, number];
   export let status: string;
 

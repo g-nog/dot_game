@@ -1,4 +1,4 @@
-import type { MatchDiagnostics } from '../domain/triangle-duel/diagnostics';
+import type { MatchDiagnostics } from '../domain/galaxy-duel/diagnostics';
 
 export function diagnosticsJson(diagnostics: MatchDiagnostics): string {
   return JSON.stringify(diagnostics, null, 2);
@@ -14,7 +14,7 @@ export function downloadDiagnostics(diagnostics: MatchDiagnostics): void {
   );
   const link = document.createElement('a');
   link.href = url;
-  link.download = `triangle-duel-playtest-${diagnostics.boardSeed}.json`;
+  link.download = `galaxy-duel-playtest-${diagnostics.boardSeed}.json`;
   link.click();
   URL.revokeObjectURL(url);
 }

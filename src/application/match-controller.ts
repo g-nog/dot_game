@@ -2,21 +2,16 @@ import {
   createDiagnostics,
   recordTransition,
   type MatchDiagnostics,
-} from '../domain/triangle-duel/diagnostics';
-import type {
-  MatchCommand,
-  MatchSize,
-  Player,
-  TriangleDuelMatch,
-} from '../domain/triangle-duel/model';
-import { createMatch, transition } from '../domain/triangle-duel/state-machine';
+} from '../domain/galaxy-duel/diagnostics';
+import type { MatchCommand, MatchSize, Player, GalaxyDuelMatch } from '../domain/galaxy-duel/model';
+import { createMatch, transition } from '../domain/galaxy-duel/state-machine';
 import { generateDotField } from '../generation/dot-field';
 import { cryptoDie, cryptoSeed } from '../generation/random';
 import { legalEndpoints } from '../geometry/legal-lines';
 import { discardMatch, restoreMatch, saveMatch, type RestoreResult } from './persistence';
 
 export type ControllerSnapshot = Readonly<{
-  match?: TriangleDuelMatch;
+  match?: GalaxyDuelMatch;
   diagnostics?: MatchDiagnostics;
   restoration: RestoreResult;
   lastMessage?: string;
