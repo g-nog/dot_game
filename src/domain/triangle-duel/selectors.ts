@@ -23,7 +23,7 @@ export function visibleStatus(match: TriangleDuelMatch): string {
   const player = activePlayer(match).name;
   switch (match.phase.kind) {
     case 'awaiting-roll':
-      return `${player}, roll the die`;
+      return `${player}, rolling…`;
     case 'drawing-lines':
       return `${player}: ${match.phase.committed} of ${match.phase.quota} lines`;
     case 'awaiting-end-turn':

@@ -13,8 +13,8 @@
     <h2 id="rules-title">Three sides. One point.</h2>
     <ol>
       <li>
-        <b>Roll</b> to reveal your exact line quota. If no compatible sequence can satisfy it, acknowledge
-        a forfeited turn.
+        <b>The die rolls automatically</b> at the start of your turn to reveal your exact line quota.
+        If no compatible sequence can satisfy it, acknowledge a forfeited turn.
       </li>
       <li>
         <b>Drag</b> from a dot to a highlighted legal endpoint. Lines cannot cross, overlap, touch another

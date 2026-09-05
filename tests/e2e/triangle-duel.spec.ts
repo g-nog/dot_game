@@ -86,7 +86,8 @@ test('setup, rules, pointer cancel, and drag commit work in portrait', async ({ 
   await page.getByRole('button', { name: 'Rules' }).click();
   await expect(page.getByRole('dialog')).toBeVisible();
   await page.getByRole('button', { name: 'Got it' }).click();
-  await page.getByRole('button', { name: 'Roll die' }).click();
+  await expect(page.getByRole('img', { name: /Die result:/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Roll die' })).toHaveCount(0);
 
   const source = page.locator('.touch-target').first();
   const sourceBox = await source.boundingBox();
@@ -133,7 +134,8 @@ test('reload preserves every quota-three persistence boundary', async ({ page })
   await page.getByRole('button', { name: 'End turn' }).click();
   await page.reload();
   await page.getByRole('button', { name: 'Resume match' }).click();
-  await expect(page.getByRole('button', { name: 'Roll die' })).toBeVisible();
+  await expect(page.getByRole('img', { name: /Die result:/ })).toBeVisible();
+  await expect(page.locator('.score.active')).toContainText('South');
 });
 
 test('starting new setup confirms replacement of the one resumable match', async ({ page }) => {
@@ -156,6 +158,11 @@ test('reduced-motion preference removes motion durations', async ({ page }) => {
       getComputedStyle(document.documentElement).getPropertyValue('--motion-fast').trim(),
     ),
   ).toBe('0ms');
+  await page.getByRole('button', { name: 'Start match' }).click();
+  await expect(page.getByRole('img', { name: /Die result:/ })).toBeVisible();
+  expect(await page.locator('.die').evaluate((die) => getComputedStyle(die).animationName)).toBe(
+    'none',
+  );
 });
 
 test('corrupt storage is explained and can be discarded', async ({ page }) => {
@@ -244,6 +251,7 @@ test('a restored final line resolves the result and rematch alternates the start
   await expect(page.getByText('Board exhausted')).toBeVisible();
   await page.getByRole('button', { name: 'Rematch' }).click();
   await expect(page.getByText('South', { exact: true }).first()).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Roll die' })).toBeVisible();
+  await expect(page.getByRole('img', { name: /Die result:/ })).toBeVisible();
+  await expect(page.locator('.score.active')).toContainText('South');
   await expect(page.locator('line.committed')).toHaveCount(0);
 });
