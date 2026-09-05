@@ -5,3 +5,7 @@ test-results/
 coverage/
 .vite/
 *.local
+
+.wrangler/
+dist-worker/
+.dev.vars

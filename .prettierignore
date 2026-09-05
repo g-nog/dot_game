@@ -5,3 +5,6 @@ test-results
 package-lock.json
 docs/
 CONTEXT.md
+
+.wrangler
+dist-worker

@@ -1,5 +1,14 @@
 <script lang="ts">
   import { onDestroy } from 'svelte';
+  import OnlineGame from './components/OnlineGame.svelte';
+  const invitedRoom = new URLSearchParams(location.search).get('room') ?? undefined;
+  let online = !!invitedRoom;
+  let onlinePlaying = false;
+  function exitOnline() {
+    online = false;
+    onlinePlaying = false;
+    history.replaceState(null, '', '/');
+  }
   import { MatchController, type ControllerSnapshot } from './application/match-controller';
   import { createMatchView } from './application/match-view';
   import { copyDiagnostics, downloadDiagnostics } from './application/playtest-export';
@@ -89,14 +98,14 @@
 </svelte:head>
 <div
   class="universe-backdrop"
-  class:playing={!!snapshot.match}
+  class:playing={online ? onlinePlaying : !!snapshot.match}
   style:background-image={`url("${background.image}")`}
   aria-hidden="true"
 ></div>
-<main class="galaxy" class:in-match={!!snapshot.match}>
+<main class="galaxy" class:in-match={online ? onlinePlaying : !!snapshot.match}>
   <header class="galaxy-header">
     <a href="/">✧ GALAXY DUEL</a><span>GALAXY DUEL <i>/</i> A RIVALRY AMONG STARS</span><span
-      class="galaxy-live">✦ LOCAL TWO-PLAYER</span
+      class="galaxy-live">{online ? '✦ ONLINE TWO-PLAYER' : '✦ LOCAL TWO-PLAYER'}</span
     >
   </header>
 
@@ -108,67 +117,83 @@
     </p>
   </div>
   <div class="supported">
-    {#if snapshot.restoration.kind === 'valid' && !snapshot.match}
-      <section class="card recovery">
-        <div class="eyebrow">Unfinished match found</div>
-        <h1>Continue the duel?</h1>
-        <p>
-          Saved {new Date(snapshot.restoration.envelope.savedAt).toLocaleString()} · {snapshot
-            .restoration.envelope.match.size}
-        </p>
-        <BackgroundPicker value={backgroundId} onchange={changeBackground} />
-        <button class="primary" onclick={() => controller.resume()}>Resume match</button>
-        <button class="secondary" onclick={chooseNew}>New setup</button>
-      </section>
-    {:else if snapshot.restoration.kind === 'invalid' && !snapshot.match}
-      <section class="card recovery">
-        <div class="eyebrow">Recovery problem</div>
-        <h1>This match can’t be resumed</h1>
-        <p>{snapshot.restoration.reason} You can safely discard it and begin again.</p>
-        <button class="primary" onclick={() => controller.discardUnrecoverable()}
-          >Discard saved match</button
-        >
-      </section>
-    {:else if !snapshot.match}
-      <MatchSetup
-        {backgroundId}
-        onbackground={changeBackground}
-        onstart={start}
+    {#if online}
+      <OnlineGame
+        roomId={new URLSearchParams(location.search).get('room') ?? undefined}
+        onexit={exitOnline}
         onrules={() => (rulesOpen = true)}
+        onplaying={(playing) => (onlinePlaying = playing)}
       />
-    {:else if resultVisible && snapshot.diagnostics && matchView}
-      <MatchResult
-        match={snapshot.match}
-        diagnostics={snapshot.diagnostics}
-        resultLabel={matchView.resultLabel}
-        scores={matchView.scores}
-        onrematch={() => controller.rematch()}
-        onnewsetup={() => controller.newSetup()}
-        ondownload={() => snapshot.diagnostics && downloadDiagnostics(snapshot.diagnostics)}
-        oncopy={copy}
-      />
-      {#if copyMessage}<div class="toast" role="status">{copyMessage}</div>{/if}
     {:else}
-      <section class="game-shell">
-        <MatchStatus
-          match={snapshot.match}
-          scores={matchView?.scores ?? [0, 0]}
-          status={matchView?.status ?? ''}
+      {#if !snapshot.match}<div class="online-entry">
+          <button class="secondary" onclick={() => (online = true)}
+            >Play online · Invite a friend</button
+          >
+        </div>{/if}
+      {#if snapshot.restoration.kind === 'valid' && !snapshot.match}
+        <section class="card recovery">
+          <div class="eyebrow">Unfinished match found</div>
+          <h1>Continue the duel?</h1>
+          <p>
+            Saved {new Date(snapshot.restoration.envelope.savedAt).toLocaleString()} · {snapshot
+              .restoration.envelope.match.size}
+          </p>
+          <BackgroundPicker value={backgroundId} onchange={changeBackground} />
+          <button class="primary" onclick={() => controller.resume()}>Resume match</button>
+          <button class="secondary" onclick={chooseNew}>New setup</button>
+        </section>
+      {:else if snapshot.restoration.kind === 'invalid' && !snapshot.match}
+        <section class="card recovery">
+          <div class="eyebrow">Recovery problem</div>
+          <h1>This match can’t be resumed</h1>
+          <p>{snapshot.restoration.reason} You can safely discard it and begin again.</p>
+          <button class="primary" onclick={() => controller.discardUnrecoverable()}
+            >Discard saved match</button
+          >
+        </section>
+      {:else if !snapshot.match}
+        <MatchSetup
+          {backgroundId}
+          onbackground={changeBackground}
+          onstart={start}
+          onrules={() => (rulesOpen = true)}
         />
-        <button class="rules-button" onclick={() => (rulesOpen = true)}>Rules</button>
-        <p class="star-guide">Connect the stars with cyan rings. Close triangles to claim them.</p>
-        <DotField
+      {:else if resultVisible && snapshot.diagnostics && matchView}
+        <MatchResult
           match={snapshot.match}
-          eligibleEndpoints={(from) => controller.eligibleEndpoints(from)}
-          oncommit={(a, b) => controller.dispatch({ type: 'COMMIT_LINE', a, b })}
+          diagnostics={snapshot.diagnostics}
+          resultLabel={matchView.resultLabel}
+          scores={matchView.scores}
+          onrematch={() => controller.rematch()}
+          onnewsetup={() => controller.newSetup()}
+          ondownload={() => snapshot.diagnostics && downloadDiagnostics(snapshot.diagnostics)}
+          oncopy={copy}
         />
-        <DieControl
-          match={snapshot.match}
-          status={matchView?.status ?? ''}
-          onroll={() => controller.roll()}
-          onendturn={() => controller.dispatch({ type: 'END_TURN' })}
-        />
-      </section>
+        {#if copyMessage}<div class="toast" role="status">{copyMessage}</div>{/if}
+      {:else}
+        <section class="game-shell">
+          <MatchStatus
+            match={snapshot.match}
+            scores={matchView?.scores ?? [0, 0]}
+            status={matchView?.status ?? ''}
+          />
+          <button class="rules-button" onclick={() => (rulesOpen = true)}>Rules</button>
+          <p class="star-guide">
+            Connect the stars with cyan rings. Close triangles to claim them.
+          </p>
+          <DotField
+            match={snapshot.match}
+            eligibleEndpoints={(from) => controller.eligibleEndpoints(from)}
+            oncommit={(a, b) => controller.dispatch({ type: 'COMMIT_LINE', a, b })}
+          />
+          <DieControl
+            match={snapshot.match}
+            status={matchView?.status ?? ''}
+            onroll={() => controller.roll()}
+            onendturn={() => controller.dispatch({ type: 'END_TURN' })}
+          />
+        </section>
+      {/if}
     {/if}
     {#if rulesOpen}<RulesView onclose={() => (rulesOpen = false)} />{/if}
   </div>
@@ -176,3 +201,13 @@
     <a href={background.source} target="_blank" rel="noreferrer">{background.credit}</a>
   </footer>
 </main>
+
+<style>
+  .online-entry {
+    max-width: 480px;
+    margin: 0 auto 16px;
+  }
+  .online-entry button {
+    width: 100%;
+  }
+</style>

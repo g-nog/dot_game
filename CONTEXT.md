@@ -99,11 +99,12 @@ _Avoid_: Difficulty
 - An independent uniform roll of a standard six-sided die produces a **Line quota** from one through six
 - Unequal cumulative roll totals are accepted in the first version and must be evaluated through playtesting
 - A player must satisfy the entire **Line quota** or take a **Forfeited turn**
-- A **Forfeited turn** passes only after the active player acknowledges **End turn**
+- A **Forfeited turn** passes after a three-second **End turn** countdown; the active player can finish sooner by pressing the button
 - A turn may begin only when the dot field offers a **Compatible line sequence** satisfying the full **Line quota**
 - A player may end an **Incomplete turn** only after their committed choices make the remaining quota impossible
-- The game detects an **Incomplete turn**, explains that no compatible continuation remains, and requires **End turn** acknowledgment
-- Completing a **Line quota** also requires **End turn** acknowledgment before control passes
+- The game detects an **Incomplete turn**, explains that no compatible continuation remains, and starts the same **End turn** countdown
+- Completing a **Line quota** starts the **End turn** countdown before control passes
+- The countdown runs only while the active player can act; an online pause cancels it and resuming starts a fresh three seconds
 - A match is played on one **Dot field** shared by both players
 - A **Dot field** preserves the same dot positions and line geometry when the play area is resized or reoriented
 - A **Head-to-head match** has exactly two players
@@ -183,3 +184,18 @@ _Avoid_: Difficulty
 Galaxy Duel opens directly at `/`. Three.js renders stars, connections, and triangle claims; SVG provides tap, drag, keyboard controls, and a playable fallback when WebGL is unavailable. Visual projection never changes logical coordinates or legality.
 
 Existing saves retain the `galaxy:triangle-duel:resumable-match` storage key and schema. Background selection remains under `galaxy:background`.
+
+## Online head-to-head matches
+
+An **Online match** is a head-to-head match played by two guests on separate devices while both are connected. Local matches remain available.
+
+- The host creates a private **Room** and shares its **Invite link**. The host chooses match size; each guest chooses their own name and a distinct curated color.
+- A room reserves exactly two **Player seats**. A private browser-stored seat key allows a guest to reconnect without an account; the invite link never includes this key. Opening the same seat in another tab replaces its previous connection.
+- The match starts when both guests have joined and are connected. Dice roll automatically at the start of a turn, matching the current local interface; the server generates the result.
+- The server validates the active seat, board version, line legality, and all rule transitions. Browsers display confirmed state and cannot choose dice results or overwrite the board.
+- A **Paused match** retains its board and accepts no gameplay actions while either guest is disconnected. The UI offers a two-minute reconnect grace period after detecting a disconnection. Afterward, the remaining guest may keep waiting or leave without a penalty; the server does not award a win or expire the match at the two-minute mark.
+- Heartbeats detect a silently lost connection within approximately 45 seconds. Reconnecting guests receive the latest saved match rather than replaying unconfirmed actions.
+- Leaving an online room while connected ends it for both guests. Leaving the page while disconnected stops reconnect attempts; the other guest can leave the paused room.
+- A rematch requires both guests to agree, preserves their profiles and match size, creates a fresh dot field, and alternates the starting player.
+- Rooms expire after 24 hours without an accepted gameplay transition (or 24 hours after creation for an unused lobby). This is cleanup, not asynchronous play support.
+- Guest seats are recoverable only in the browser that retains their key. There are no accounts, public matchmaking, spectators, rankings, or persistent player history in this version.

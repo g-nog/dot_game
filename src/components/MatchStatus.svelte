@@ -3,6 +3,7 @@
   export let match: GalaxyDuelMatch;
   export let scores: readonly [number, number];
   export let status: string;
+  export let viewerSeat: number | undefined = undefined;
 
   $: activePlayer = match.players[match.activePlayerIndex];
 </script>
@@ -15,7 +16,11 @@
   >
     <div class="player-label">
       <span>{match.players[0].name}</span><small
-        >{match.activePlayerIndex === 0 ? 'Your turn' : 'Up next'}</small
+        >{match.activePlayerIndex === 0
+          ? viewerSeat === undefined || viewerSeat === 0
+            ? 'Your turn'
+            : 'Playing'
+          : 'Up next'}</small
       >
     </div>
     <strong>{scores[0]}</strong>
@@ -33,7 +38,11 @@
   >
     <div class="player-label">
       <span>{match.players[1].name}</span><small
-        >{match.activePlayerIndex === 1 ? 'Your turn' : 'Up next'}</small
+        >{match.activePlayerIndex === 1
+          ? viewerSeat === undefined || viewerSeat === 1
+            ? 'Your turn'
+            : 'Playing'
+          : 'Up next'}</small
       >
     </div>
     <strong>{scores[1]}</strong>

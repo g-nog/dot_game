@@ -5,6 +5,7 @@
   import GalaxyCanvas from './galaxy/GalaxyCanvas.svelte';
   let ready = false;
   export let match: GalaxyDuelMatch;
+  export let disabled = false;
   export let oncommit: (a: DotId, b: DotId) => void;
   export let eligibleEndpoints: (from: DotId) => DotId[];
 
@@ -32,7 +33,8 @@
   let preview: { x: number; y: number } | undefined;
 
   $: points = new Map(displayMatch.dotField.dots.map((dot) => [dot.id, dot]));
-  $: canDraw = match.phase.kind === 'drawing-lines';
+  $: canDraw = !disabled && match.phase.kind === 'drawing-lines';
+  $: if (!canDraw) cancel();
 
   function logical(event: PointerEvent) {
     const point = svg.createSVGPoint();
@@ -75,7 +77,7 @@
   }
 
   function finish(event: PointerEvent) {
-    if (!origin) return;
+    if (!origin || !canDraw) return;
     const location = logical(event);
     const nearest = eligible
       .map((id) => ({ id, dot: points.get(id)! }))
@@ -175,6 +177,7 @@
             }}
             aria-label={`Connect star ${dot.id}`}
             aria-pressed={origin === dot.id}
+            aria-disabled={!canDraw}
             class="touch-target"
             class:eligible={eligible.includes(dot.id)}
             cx={dot.x}

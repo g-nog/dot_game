@@ -6,6 +6,90 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/svelte';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import MatchSetup from '../src/components/MatchSetup.svelte';
 import RulesView from '../src/components/RulesView.svelte';
+import type { GalaxyDuelMatch } from '../src/domain/galaxy-duel/model';
+
+describe('automatic end turn', () => {
+  const match: GalaxyDuelMatch = {
+    ...createMatch({
+      id: 'countdown-test',
+      boardSeed: 1,
+      size: 'quick',
+      dotField: triangleField,
+      players: [
+        { id: 'player-1', name: 'North', color: '#e76f51' },
+        { id: 'player-2', name: 'South', color: '#2a9d8f' },
+      ],
+      startingPlayerIndex: 0,
+      createdAt: '2026-09-05T12:00:00Z',
+    }),
+    phase: { kind: 'awaiting-end-turn', quota: 1, committed: 1, reason: 'quota-complete' },
+  };
+
+  afterEach(() => {
+    cleanup();
+    vi.useRealTimers();
+  });
+
+  it('shows the countdown and ends exactly once after three seconds', async () => {
+    vi.useFakeTimers();
+    const onendturn = vi.fn();
+    const { rerender } = render(DieControl, { match, status: '', onroll: vi.fn(), onendturn });
+    await tick();
+    const button = screen.getByRole('button', { name: 'End turn' });
+    expect(button).toHaveTextContent('3s');
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(button).toHaveTextContent('2s');
+    // A fresh online snapshot of the same turn must not reset the timer.
+    await rerender({ match: { ...match } });
+    await vi.advanceTimersByTimeAsync(1000);
+    expect(button).toHaveTextContent('1s');
+    await vi.advanceTimersByTimeAsync(999);
+    expect(onendturn).not.toHaveBeenCalled();
+    await vi.advanceTimersByTimeAsync(1);
+    expect(onendturn).toHaveBeenCalledTimes(1);
+    expect(button).toBeDisabled();
+    await vi.advanceTimersByTimeAsync(3000);
+    expect(onendturn).toHaveBeenCalledTimes(1);
+  });
+
+  it('lets the player end early without a duplicate automatic action', async () => {
+    vi.useFakeTimers();
+    const onendturn = vi.fn();
+    render(DieControl, { match, status: '', onroll: vi.fn(), onendturn });
+    await tick();
+    await vi.advanceTimersByTimeAsync(1000);
+    await fireEvent.click(screen.getByRole('button', { name: 'End turn' }));
+    expect(onendturn).toHaveBeenCalledTimes(1);
+    await vi.advanceTimersByTimeAsync(3000);
+    expect(onendturn).toHaveBeenCalledTimes(1);
+  });
+
+  it('stops while disabled, restarts on resume, and cancels on unmount', async () => {
+    vi.useFakeTimers();
+    const onendturn = vi.fn();
+    const { rerender, unmount } = render(DieControl, {
+      match,
+      status: '',
+      onroll: vi.fn(),
+      onendturn,
+    });
+    await tick();
+    await vi.advanceTimersByTimeAsync(2000);
+    await rerender({ disabled: true });
+    await vi.advanceTimersByTimeAsync(5000);
+    expect(onendturn).not.toHaveBeenCalled();
+    expect(screen.getByRole('button', { name: 'End turn' })).not.toHaveTextContent('1s');
+    await rerender({ disabled: false });
+    expect(screen.getByRole('button', { name: 'End turn' })).toHaveTextContent('3s');
+    await vi.advanceTimersByTimeAsync(3000);
+    expect(onendturn).toHaveBeenCalledTimes(1);
+    await rerender({ match: { ...match, turn: match.turn + 1, activePlayerIndex: 1 } });
+    expect(screen.getByRole('button', { name: 'End turn' })).toHaveTextContent('3s');
+    unmount();
+    await vi.advanceTimersByTimeAsync(3000);
+    expect(onendturn).toHaveBeenCalledTimes(1);
+  });
+});
 
 describe('setup and rules components', () => {
   it('validates distinct curated player colors', async () => {

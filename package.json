@@ -10,14 +10,18 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
+    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json && tsc -p tsconfig.worker.json",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "benchmark": "vitest bench --run tests/performance"
+    "benchmark": "vitest bench --run tests/performance",
+    "dev:server": "wrangler dev --config server/wrangler.toml --port 8787 --var ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173,http://127.0.0.1:4174",
+    "build:server": "wrangler deploy --config server/wrangler.toml --dry-run --outdir dist-worker",
+    "deploy:server": "wrangler deploy --config server/wrangler.toml",
+    "deploy:site": "npm run build && wrangler pages deploy dist --project-name triangle-duel --branch main"
   },
   "dependencies": {
     "@tailwindcss/vite": "latest",
@@ -26,6 +30,7 @@
     "three": "^0.185.1"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260905.1",
     "@eslint/js": "latest",
     "@playwright/test": "latest",
     "@sveltejs/vite-plugin-svelte": "latest",
@@ -45,6 +50,7 @@
     "typescript": "latest",
     "typescript-eslint": "latest",
     "vite": "latest",
-    "vitest": "latest"
+    "vitest": "latest",
+    "wrangler": "^4.129.0"
   }
 }

@@ -14,7 +14,7 @@
     <ol>
       <li>
         <b>The die rolls automatically</b> at the start of your turn to reveal your exact line quota.
-        If no compatible sequence can satisfy it, acknowledge a forfeited turn.
+        If no compatible sequence can satisfy it, it is a forfeited turn.
       </li>
       <li>
         <b>Drag</b> from a dot to a highlighted legal endpoint. Lines cannot cross, overlap, touch another
@@ -26,7 +26,8 @@
       </li>
       <li>
         <b>Finish</b> the full quota. If your committed choices make the remainder impossible, those lines
-        stay and the turn is incomplete.
+        stay and the turn is incomplete. The End turn button counts down for three seconds, then passes
+        play automatically. Tap it to finish sooner.
       </li>
     </ol>
     <p>
